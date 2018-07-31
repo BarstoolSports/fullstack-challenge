@@ -1,0 +1,262 @@
+{
+	"deleted": false,
+	"status": "CLOSED",
+	"awayTeamFinal": 1,
+	"awayTeamDetails": [
+		{
+			"number": 1,
+			"sequence": 1,
+			"runs": 0,
+			"hits": 1,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 2,
+			"sequence": 2,
+			"runs": 1,
+			"hits": 2,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 3,
+			"sequence": 3,
+			"runs": 0,
+			"hits": 2,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 4,
+			"sequence": 4,
+			"runs": 0,
+			"hits": 0,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 5,
+			"sequence": 5,
+			"runs": 0,
+			"hits": 0,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 6,
+			"sequence": 6,
+			"runs": 0,
+			"hits": 2,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 7,
+			"sequence": 7,
+			"runs": 0,
+			"hits": 0,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 8,
+			"sequence": 8,
+			"runs": 0,
+			"hits": 1,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 9,
+			"sequence": 9,
+			"runs": 0,
+			"hits": 1,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 10,
+			"sequence": 10,
+			"runs": 0,
+			"hits": 0,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 11,
+			"sequence": 11,
+			"runs": 0,
+			"hits": 0,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 12,
+			"sequence": 12,
+			"runs": 0,
+			"hits": 0,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 13,
+			"sequence": 13,
+			"runs": 0,
+			"hits": 1,
+			"errors": 0,
+			"type": "inning"
+		}
+	],
+	"homeTeamFinal": 2,
+	"homeTeamDetails": [
+		{
+			"number": 1,
+			"sequence": 1,
+			"runs": 0,
+			"hits": 0,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 2,
+			"sequence": 2,
+			"runs": 0,
+			"hits": 0,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 3,
+			"sequence": 3,
+			"runs": 0,
+			"hits": 1,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 4,
+			"sequence": 4,
+			"runs": 0,
+			"hits": 0,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 5,
+			"sequence": 5,
+			"runs": 1,
+			"hits": 2,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 6,
+			"sequence": 6,
+			"runs": 0,
+			"hits": 0,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 7,
+			"sequence": 7,
+			"runs": 0,
+			"hits": 0,
+			"errors": 1,
+			"type": "inning"
+		},
+		{
+			"number": 8,
+			"sequence": 8,
+			"runs": 0,
+			"hits": 1,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 9,
+			"sequence": 9,
+			"runs": 0,
+			"hits": 0,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 10,
+			"sequence": 10,
+			"runs": 0,
+			"hits": 1,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 11,
+			"sequence": 11,
+			"runs": 0,
+			"hits": 0,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 12,
+			"sequence": 12,
+			"runs": 0,
+			"hits": 0,
+			"errors": 0,
+			"type": "inning"
+		},
+		{
+			"number": 13,
+			"sequence": 13,
+			"runs": 1,
+			"hits": 2,
+			"errors": 0,
+			"type": "inning"
+		}
+	],
+	"isPeriodOver": "",
+	"currentPeriod": 13,
+	"currentPeriodHalf": "B",
+	"oddsAvailable": false,
+	"createdAt": "2018-07-19T16:39:50.736Z",
+	"modifiedAt": "2018-07-31T11:13:18.826Z",
+	"feedId": "35e77862-a9cb-48ca-8c55-aa03ac02e004",
+	"dateTime": 1532992200,
+	"homeTeam": {
+		"deleted": false,
+		"teamColor": "C8102E",
+		"textColor": "FFFFFF",
+		"createdAt": "2018-07-18T13:44:50.124Z",
+		"modifiedAt": "2018-07-30T12:46:39.014Z",
+		"feedId": "93941372-eb4c-4c40-aced-fe3267174393",
+		"abbr": "BOS",
+		"league": "b5b37519-2b6d-4d33-a5f1-4ac85e9e2af3",
+		"market": "Boston",
+		"name": "Red Sox",
+		"id": "5ff15822-8b92-405a-94b3-2ebce0ca5a98"
+	},
+	"awayTeam": {
+		"deleted": false,
+		"teamColor": "BA0C2F",
+		"textColor": "FFFFFF",
+		"createdAt": "2018-07-18T13:44:50.131Z",
+		"modifiedAt": "2018-07-30T12:47:13.881Z",
+		"feedId": "2142e1ba-3b40-445c-b8bb-f1f8b1054220",
+		"abbr": "PHI",
+		"league": "b5b37519-2b6d-4d33-a5f1-4ac85e9e2af3",
+		"market": "Philadelphia",
+		"name": "Phillies",
+		"id": "76deec12-e6cf-45e4-9f8d-f63a1931888e"
+	},
+	"league": {
+		"deleted": false,
+		"createdAt": "2018-07-18T13:44:50.061Z",
+		"modifiedAt": "2018-07-18T13:44:50.061Z",
+		"feedId": "2fa448bc-fc17-4d3d-be03-e60e080fdc26",
+		"alias": "MLB",
+		"name": "Major League Baseball",
+		"id": "b5b37519-2b6d-4d33-a5f1-4ac85e9e2af3"
+	},
+	"id": "2957ecf6-adde-4783-9692-b73d2d14906e"
+}

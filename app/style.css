@@ -1,0 +1,134 @@
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+}
+
+.boxscore__team {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.boxscore__team--header {
+  border-bottom: 1px solid #DDD;
+}
+.boxscore__team label {
+  padding: 8px 0;
+  width: 2.5rem;
+  text-align: center;
+  background: #EFEFEF;
+  border-right: 1px solid #DDD;
+}
+.boxscore__team .boxscore__team__units {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+}
+@media (min-width: 37.5rem) {
+  .boxscore__team .boxscore__team__units {
+    width: 86%;
+  }
+}
+.boxscore__team .boxscore__team__units span {
+  display: inline-block;
+  padding: 8px 0;
+  text-align: center;
+}
+.boxscore__team .boxscore__team__results {
+  display: flex;
+  justify-content: space-evenly;
+  width: 20%;
+  font-weight: 700;
+  background: #efefef;
+  border-left: 1px solid #DDD;
+}
+@media (min-width: 37.5rem) {
+  .boxscore__team .boxscore__team__results {
+    width: 14%;
+  }
+}
+.boxscore__team .boxscore__team__results span {
+  display: inline-block;
+  padding: 8px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.boxscore__details {
+  display: flex;
+  justify-content: center;
+}
+.boxscore__details > div {
+  min-height: 40px;
+}
+.boxscore__details .boxscore__details__team {
+  width: 44%;
+}
+.boxscore__details .boxscore__details__info {
+  width: 12%;
+  background: #EFEFEF;
+  text-align: center;
+  display: flex;
+  flex-direciton: column;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  border-top: 1px solid #DDD;
+}
+
+.boxscore__details__team {
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+  text-align: center;
+}
+.boxscore__details__team p {
+  display: block;
+  margin: 0;
+  padding: 0 20px;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 30px;
+}
+.boxscore__details__team p strong {
+  display: none;
+}
+@media (min-width: 37.5rem) {
+  .boxscore__details__team p strong {
+    display: block;
+  }
+}
+.boxscore__details__team p small {
+  display: block;
+}
+@media (min-width: 37.5rem) {
+  .boxscore__details__team p small {
+    display: none;
+  }
+}
+.boxscore__details__team span {
+  display: block;
+  text-transform: uppercase;
+}
+.boxscore__details__team--away {
+  background: #002F6C;
+}
+.boxscore__details__team--home {
+  background: #BA0C2F;
+}
+
+.boxscore {
+  margin: 50px auto 150px;
+  min-width: 300px;
+  max-width: 700px;
+  min-height: 40px;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+  background: #fafafa;
+  overflow: hidden;
+  font-size: .75rem;
+  font-weight: 400;
+}
