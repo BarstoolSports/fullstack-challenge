@@ -22,12 +22,12 @@ The Boxscore challenge gives you the opportunity to use newer concepts and force
 
 * In order to maintain a streamlined, maintainable, and easily testable codebase, we should strive to build components that are highly adaptable. We don't want to build a box score component for every type of sport we are covering, but instead, create a component that can be used any time we want to display a box score for a game.
 
-### Deliverable
-* Send us two repos.
-	* First repo will be the NodeJS server.
-    * It will consume and store the feed data from the feeds above, in a database.
-    * Additionally, you should create endpoints that allow the React app to consume the data that is in the database.
-    * This should be very easy to setup. Something as simple as `yarn` then `yarn start` to start the server.
-	* Second repo will be the React app.
-    * This app will consume the above NodeJS API, and will feed the data into the components.
-    * Similarily, it should be very easy to setup.
+### Deliverables
+Links to both the NodeJS Server repo, and the React App repo.
+* The NodeJS Server should:
+    	* Consume and store the feed data from the feeds above, in a database.
+    	* Contain endpoints that allowing the React app to consume data from the database.
+    	* Be simple and straightforward to run. Think `yarn start` or `npm start`.
+* The React app should:
+    	* Consume the NodeJS API, and will feed data into the components.
+    	* Also, be simple and straighforward to get running.
