@@ -9,8 +9,8 @@ The Boxscore challenge gives you the opportunity to use newer concepts and force
 
 ### We want you to do the following:
 * Build an API using NodeJS to consume the Feed below.
-	* Feed 1: http://
-	* Feed 2: http://
+	* Feed 1: https://2ncp9is1k8.execute-api.us-east-1.amazonaws.com/dev/feed/game/one
+	* Feed 2: https://2ncp9is1k8.execute-api.us-east-1.amazonaws.com/dev/feed/game/two
 	* Store the info in a database. (Mongo???)
 * Build a small React project.  
 	* The HTML & CSS is provided for you in this repo.
@@ -24,8 +24,10 @@ The Boxscore challenge gives you the opportunity to use newer concepts and force
 
 ### Deliverable
 * Send us two repos.
-	* A baseball game, Top of the12th inning
-	* A football game, Final
-	* A hockey game, 1st Period
-
-*Extra Credit*: Use javascript to populate the boxscores using JSON.
+	* First repo will be the NodeJS server.
+    * It will consume and store the feed data from the feeds above, in a database.
+    * Additionally, you should create endpoints that allow the React app to consume the data that is in the database.
+    * This should be very easy to setup. Something as simple as `yarn` then `yarn start` to start the server.
+	* Second repo will be the React app.
+    * This app will consume the above NodeJS API, and will feed the data into the components.
+    * Similarily, it should be very easy to setup.
