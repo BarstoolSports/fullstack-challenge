@@ -13,7 +13,7 @@ The Boxscore challenge gives you the opportunity to use newer concepts and force
 	* Feed 2: https://2ncp9is1k8.execute-api.us-east-1.amazonaws.com/dev/feed/game/two
 	* Each feed should be hit at most every 15 seconds by our API, therefore...
 	* The data needs to be cached in a database. (Suggestion: MongoDB)
-	* Each request to our API should check MongoDB for cached data, if it's last updated time is < 15 seconds then return it. Otherwise fetch fresh data from the feed and cache it in the database.
+	* Each request to our API should check the database for cached data: If it's last updated time is < 15 seconds then return it. Otherwise fetch fresh data from the feed and cache it in the database.
 * Build a small React project.  
 	* The HTML & CSS is provided for you in this repo.
 
