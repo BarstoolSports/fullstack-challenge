@@ -1,16 +1,14 @@
 # The Boxscore Challenge
 The Boxscore is the goto widget on any sports site to get quick information about a game.  ESPN, Fox Sports, theScore, and many others have solutions.
 
-Here is ESPN’s solution. They even went ahead and added pitchers info. 
-![ESPN Box Score](https://dl.dropboxusercontent.com/s/jvbqjkgyspt5p5u/Screenshot%202018-07-16%2020.32.21.png "ESPN Box Score")
-[View on ESPN's site](http://www.espn.com/mlb/boxscore?gameId=380715102)
+Here is ESPN’s solution. They even went ahead and added pitchers info: [Boxscore](http://www.espn.com/mlb/boxscore?gameId=380715102)
 
 The Boxscore challenge gives you the opportunity to use newer concepts and forces you to use best practices when it comes to its design and engineering.
 
 ### We want you to do the following:
 * Build an API using NodeJS to consume the Feeds below.
-	* Feed 1: https://2ncp9is1k8.execute-api.us-east-1.amazonaws.com/dev/feed/game/one
-	* Feed 2: https://2ncp9is1k8.execute-api.us-east-1.amazonaws.com/dev/feed/game/two
+	* Basketball Feed: https://chumley.barstoolsports.com/dev/data/basketball.json
+	* Soccer Feed: https://chumley.barstoolsports.com/dev/data/soccer.json
 	* Each feed should be hit at most every 15 seconds by our API, therefore...
 	* The data needs to be cached in a database. (Suggestion: MongoDB)
 	* Each request to our API should check the database for cached data: If it's last updated time is < 15 seconds then return it. Otherwise fetch fresh data from the feed and cache it in the database.
