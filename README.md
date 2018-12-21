@@ -26,7 +26,6 @@ The Boxscore challenge gives you the opportunity to use newer concepts and force
 
 ### Deliverables
 Links to both the NodeJS Server repo, and the React App repo.
-
 * The NodeJS Server should:
 	* Consume and store the feed data from the feeds above, in a database.
 	* Contain endpoints that allowing the React app to consume data from the database.
