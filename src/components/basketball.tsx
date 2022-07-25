@@ -1,6 +1,6 @@
-import type { NextPage } from 'next'
+import type { FC } from 'react'
 
-const Basketball: NextPage = () => {
+const Basketball: FC = () => {
   return (
     <>
       <h1>NBA</h1>

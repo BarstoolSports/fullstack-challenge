@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { FC } from 'react'
 import Image from 'next/image'
 import { Dispatch, SetStateAction } from 'react'
 
@@ -7,7 +7,7 @@ interface HeaderProps {
   setLeague: Dispatch<SetStateAction<'MLB' | 'NBA'>>
 }
 
-const Header: NextPage<HeaderProps> = (props) => {
+const Header: FC<HeaderProps> = (props) => {
   return (
     <header className='flex items-center mb-12'>
       <div className='relative h-24 mr-10 w-44'>

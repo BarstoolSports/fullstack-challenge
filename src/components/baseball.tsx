@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { FC } from 'react'
 import { trpc } from '../utils/trpc'
 import GameHeader from './gameHeader'
 
@@ -22,7 +22,7 @@ interface gameData {
   }
 }
 
-const Baseball: NextPage = () => {
+const Baseball: FC = () => {
   const getGame = trpc.useQuery(['game.get', { league: 'MLB' }])
 
   if (getGame.isLoading) return null

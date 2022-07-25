@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { FC } from 'react'
 
 interface GameHeaderProps {
   team1: string
@@ -8,7 +8,7 @@ interface GameHeaderProps {
   league: string
 }
 
-const GameHeader: NextPage<GameHeaderProps> = (props) => {
+const GameHeader: FC<GameHeaderProps> = (props) => {
   return (
     <>
       <h1 className='mb-4 text-3xl font-bold tracking-wide text-center'>
