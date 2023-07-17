@@ -4,25 +4,48 @@ import React from 'react';
 type TableCell = string | number | JSX.Element;
 
 type TableProps = {
-  headers: TableCell[];
+  header: TableCell[];
   rows: TableCell[][];
+  teams: TableCell[][];
 };
 
-export default function Table({ headers, rows }: TableProps) {
+export default function Table({ header, rows, teams }: TableProps) {
+  console.log("HEADER ", header);
+  console.log("ROWS ", rows);
+  console.log("TEAMS ", teams);
   return (
     <table>
       <thead>
         <tr>
-          {headers.map((header, index) => <th key={index}>{header}</th>)}
+          <th>Team</th>
+          {Array.from({ length: header.periods }, (_, index) => (
+            <th>
+              {index + 1}
+            </th>
+          ))}
         </tr>
       </thead>
       <tbody>
-        {rows.map((row, rowIndex) => (
-          <tr key={rowIndex}>
-            {row.map((cell, cellIndex) => <td key={cellIndex}>{cell}</td>)}
-          </tr>
-        ))}
+        <tr>
+          <td>
+            {teams.awayTeam}
+          </td>
+          {rows.awayTeamScores.map(((score, index) => (
+            <td key={index}>
+              {score}
+            </td>
+          )))}
+        </tr>
+
+        <tr>
+          <td>{teams.homeTeam}</td>
+          {rows.homeTeamScores.map(((score, index) => (
+            <td key={index}>
+              {score}
+            </td>
+          )))}
+        </tr>
       </tbody>
-    </table>
+    </table >
   );
 }

@@ -1,15 +1,14 @@
 import React from "react";
-import { useTeams } from "../hooks/useTeams";
 import Table from "../blocks/NBATable";
+import useDataToTable from "../hooks/useDataToTable";
 
 type BoxScoreProps = {
   sport: string;
 };
 
 export default function BoxScore({ sport }: BoxScoreProps) {
-  const data = useTeams(sport);
-
+  const { header, rows, teams } = useDataToTable(sport);
   return (
-    <Table data={data} />
+    <Table header={header} rows={rows} teams={teams} />
   );
 }
