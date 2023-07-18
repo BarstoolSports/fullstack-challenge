@@ -6,6 +6,7 @@ interface TableProps {
 }
 
 export default function Table({ header, rows }: TableProps) {
+  // would return a placeholder here instead of null
   if (!header.length || !rows.length) return null;
 
   const headerStyle = header.map((_, index) =>
@@ -13,9 +14,8 @@ export default function Table({ header, rows }: TableProps) {
     ${index === 0 ? 'w-1/6' : 'w-auto'}`
   );
 
-
   return (
-    <table className="w-4/5 mx-auto mb-8 border-2 border-black">
+    <table className="w-full border-2 border-black">
       <thead className="w-full border-b-2 border-black">
         <tr className="w-full">
           {header.map((head, index) => (

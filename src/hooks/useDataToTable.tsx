@@ -17,18 +17,52 @@ type MLBScores = [
   errors: number,
 ];
 
-interface MLBRows {
+interface MLBRow {
   scores: MLBScores;
+}
+
+interface GameInfo {
+  awayTeam: {
+    lastName: string;
+  };
+  homeTeam: {
+    lastName: string;
+  };
+  status: string;
+  inning?: number;
 }
 
 export default function useDataToTable(sport: string) {
   const [header, setHeader] = useState<TableHeader[]>([]);
-  const [rows, setRows] = useState<(TableRow | MLBRows)[]>([]);
+  const [rows, setRows] = useState<(TableRow | MLBRow)[]>([]);
+  const [gameInfo, setGameInfo] = useState<GameInfo>({
+    awayTeam: {
+      lastName: "",
+    },
+    homeTeam: {
+      lastName: "",
+    },
+    status: "",
+    inning: undefined
+  });
 
   useEffect(() => {
     fetch(`${process.env.API_URL}/api/${sport}`)
       .then((res) => res.json())
       .then((data) => {
+        if (!data) {
+          throw new Error("No data received from API");
+        }
+        // add team color here but JSON data doesn't support that
+        setGameInfo({
+          awayTeam: {
+            lastName: data.away_team.last_name,
+          },
+          homeTeam: {
+            lastName: data.home_team.last_name,
+          },
+          status: data.event_information.status
+        });
         if (sport === sports.NBA) {
           const periodHeaders =
             data.home_period_scores.map((_: undefined, index: number) => (
@@ -52,7 +86,6 @@ export default function useDataToTable(sport: string) {
             }
           ]);
         } else if (sport === sports.MLB) {
-
           const inningHeaders = data.home_period_scores.map(
             (_: undefined, index: number) => (
               { label: `${index + 1}` }
@@ -66,9 +99,7 @@ export default function useDataToTable(sport: string) {
             { label: 'E' }
           ]
           );
-
           setRows([
-
             {
               scores: [
                 data.away_team.abbreviation,
@@ -88,11 +119,15 @@ export default function useDataToTable(sport: string) {
               ] as MLBScores
             }
           ]);
+          setGameInfo({
+            ...gameInfo,
+            inning: data.home_period.scores.length
+          });
         } else if (sport === sports.NFL) { // add more sports as needed
         }
       })
       .catch((error) => console.log(error));
   }, [sport]);
 
-  return { header, rows };
+  return { header, rows, gameInfo };
 }
