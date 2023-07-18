@@ -2,61 +2,97 @@ import { useEffect, useState } from "react";
 import { sports } from "../constants/sports";
 
 interface TableHeader {
-  periods: number;
+  label: string;
 }
 
 interface TableRow {
-  awayTeamScores: number[];
-  homeTeamScores: number[];
+  scores: (string | number)[];
 }
 
-interface TeamInfo {
-  awayTeam: string;
-  homeTeam: string;
+type MLBScores = [
+  team: string,
+  ...inningScores: number[],
+  runs: number,
+  hits: number,
+  errors: number,
+];
+
+interface MLBRows {
+  scores: MLBScores;
 }
 
 export default function useDataToTable(sport: string) {
-  const [header, setHeader] = useState<TableHeader>({ periods: 0 });
-  const [rows, setRows] = useState<TableRow>({
-    awayTeamScores: [], homeTeamScores: []
-  });
-  const [teams, setTeams] = useState<TeamInfo>({
-    awayTeam: "", homeTeam: ""
-  });
+  const [header, setHeader] = useState<TableHeader[]>([]);
+  const [rows, setRows] = useState<(TableRow | MLBRows)[]>([]);
 
   useEffect(() => {
     fetch(`${process.env.API_URL}/api/${sport}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("DATA ", data);
-        setHeader({ periods: data.home_period_scores.length });
-        setRows(
-          {
-            awayTeamScores: data.away_period_scores,
-            homeTeamScores: data.home_period_scores,
-          },
-        );
         if (sport === sports.NBA) {
-          setTeams(
+          const periodHeaders =
+            data.home_period_scores.map((_: undefined, index: number) => (
+              {
+                label: `${index + 1}`
+              }
+            ));
+          setHeader([{ label: '' }, ...periodHeaders]);
+          setRows([
             {
-              awayTeam: data.away_team.abbreviation,
-              homeTeam: data.home_team.abbreviation,
+              scores: [
+                data.away_team.abbreviation,
+                ...data.away_period_scores
+              ]
             },
-          );
+            {
+              scores: [
+                data.home_team.abbreviation,
+                ...data.home_period_scores
+              ]
+            }
+          ]);
         } else if (sport === sports.MLB) {
 
-          setTeams(
-            {
-              awayTeam: data.away_team.abbreviation,
-              homeTeam: data.home_team.abbreviation,
-            },
+          const inningHeaders = data.home_period_scores.map(
+            (_: undefined, index: number) => (
+              { label: `${index + 1}` }
+            )
           );
-        } else if (sport === sports.NFL) {
-          // Add more sports as needed
+          setHeader([
+            { label: '' },
+            ...inningHeaders,
+            { label: 'R' },
+            { label: 'H' },
+            { label: 'E' }
+          ]
+          );
+
+          setRows([
+
+            {
+              scores: [
+                data.away_team.abbreviation,
+                ...data.away_period_scores,
+                data.away_batter_totals.runs,
+                data.away_batter_totals.hits,
+                data.away_errors
+              ] as MLBScores
+            },
+            {
+              scores: [
+                data.home_team.abbreviation,
+                ...data.home_period_scores,
+                data.home_batter_totals.runs,
+                data.home_batter_totals.hits,
+                data.home_errors
+              ] as MLBScores
+            }
+          ]);
+        } else if (sport === sports.NFL) { // add more sports as needed
         }
       })
       .catch((error) => console.log(error));
   }, [sport]);
 
-  return { header, rows, teams };
+  return { header, rows };
 }

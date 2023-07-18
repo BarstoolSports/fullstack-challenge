@@ -1,5 +1,5 @@
 import React from "react";
-import Table from "../blocks/NBATable";
+import Table from "../blocks/Table";
 import useDataToTable from "../hooks/useDataToTable";
 
 type BoxScoreProps = {
@@ -7,8 +7,8 @@ type BoxScoreProps = {
 };
 
 export default function BoxScore({ sport }: BoxScoreProps) {
-  const { header, rows, teams } = useDataToTable(sport);
+  const { header, rows } = useDataToTable(sport);
   return (
-    <Table header={header} rows={rows} teams={teams} />
+    <Table header={header} rows={rows} />
   );
 }
