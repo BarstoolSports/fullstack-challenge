@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import arrowL from "../public/arrowL.png";
+import arrowR from "../public/arrowR.png";
 
 const useApi = (url) => {
   const [data, setData] = useState(null);
@@ -38,6 +40,9 @@ function App() {
   const [selectedLeague, setSelectedLeague] = useState("MLB");
   const [awayScore, setAwayScore] = useState(0);
   const [homeScore, setHomeScore] = useState(0);
+  const [homeWinner, setHomeWinner] = useState(false);
+  const [awayWinner, setAwayWinner] = useState(false);
+
   const { data, isLoading, errorData } = useApi(
     `http://localhost:8080/${selectedLeague}`,
   );
@@ -57,6 +62,15 @@ function App() {
       ),
     );
   }, [data]);
+
+  useEffect(() => {
+    setHomeWinner(
+      homeScore > awayScore && data?.event_information.status === "completed",
+    );
+    setAwayWinner(
+      homeScore < awayScore && data?.event_information.status === "completed",
+    );
+  }, [homeScore, awayScore, data?.event_information.status]);
 
   const periods = Math.max(
     data?.away_period_scores?.length,
@@ -164,20 +178,90 @@ function App() {
   };
 
   const displayPitchers = (allPitchers) => {
+    const winner = allPitchers.find((pitcher) => {
+      return pitcher.win === true;
+    });
+
+    const loser = allPitchers.find((pitcher) => {
+      return pitcher.loss === true;
+    });
+
+    const pitchers = [].concat(winner, loser);
+
     return (
-      <div className="text-[12px] flex ml-2 mt-3">
-        <div className="mr-4">
-          WP:{" "}
-          {allPitchers.find((pitcher) => {
-            return pitcher.win === true;
-          })?.display_name || "n/a"}
+      <div className="flex text-[12px] mt-2">
+        <div className="flex w-full">
+          {pitchers.map((pitcher, index) => (
+            <div
+              key={index}
+              className="flex flex-1 items-center justify-center p-2"
+            >
+              <img
+                src={`../public/${`${pitcher?.first_name} ${pitcher?.last_name}`}.png`}
+                alt={`Avatar ${index + 1}`}
+                className="w-12 h-12 rounded-full border"
+              />
+              <div className="flex flex-col space-y-1 ml-2">
+                <div className="h-3 font-bold">
+                  {pitcher?.win ? "WIN" : "LOSS"}
+                </div>
+                <div className="h-3 text-blue-600">
+                  {`${pitcher?.first_name[0]}. ${pitcher?.last_name}`}
+                </div>
+                <div className="h-3 text-[10px]">
+                  {`${pitcher?.innings_pitched} IP, `}
+                  {`${pitcher?.hits_allowed} H, `}
+                  {`${pitcher?.earned_runs} ER, `}
+                  {`${pitcher?.strike_outs} K, `}
+                  {`${pitcher?.walks} BB`}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-        <div>
-          {" "}
-          LP:{" "}
-          {allPitchers.find((pitcher) => {
-            return pitcher.loss === true;
-          })?.display_name || "n/a"}
+      </div>
+    );
+  };
+
+  const displayHighScorers = (away, home) => {
+    const homeHighScorer = home?.reduce((maxObj, obj) =>
+      obj.points > maxObj.points ? obj : maxObj,
+    );
+
+    const awayHighScorer = away?.reduce((maxObj, obj) =>
+      obj.points > maxObj.points ? obj : maxObj,
+    );
+
+    const highScorers = [].concat(homeHighScorer, awayHighScorer);
+
+    return (
+      <div className="flex text-[12px] mt-2">
+        <div className="flex w-full">
+          {highScorers.map((player, index) => (
+            <div
+              key={index}
+              className="flex flex-1 items-center justify-center p-2"
+            >
+              <img
+                src={`../public/${`${player?.first_name} ${player?.last_name}`}.png`}
+                alt={`Avatar ${index + 1}`}
+                className="w-12 h-12 rounded-full border"
+              />
+              <div className="flex flex-col space-y-2 ml-2">
+                <div className="h-3 text-blue-600">
+                  {`${player?.first_name?.[0]}. ${player?.last_name} ${player?.position} - ${player?.team_abbreviation}`}
+                </div>
+                <div className="h-3 text-[10px]">
+                  {`${player?.points} PTS, `}
+                  {`${
+                    (player?.offensive_rebounds || 0) +
+                    (player?.defensive_rebounds || 0)
+                  } REB, `}
+                  {`${player?.assists} AST`}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -227,79 +311,65 @@ function App() {
         }
       />
       <div className="bg-gray-50 p-6 shadow-xl rounded-lg mt-10">
-        <div className="flex items-center justify-center">
-          <div className="flex-1 bg-gray-50 p-4 text-center text-gray-700">
+        <div className="flex items-center justify-center ">
+          <div className="flex-0 bg-gray-50 p-4 text-center text-gray-500">
             <img
               src={`./${`${data?.away_team.first_name} ${data?.away_team.last_name}`}.gif`}
               alt="team"
+              className="h-10 w-16"
             />
-            <b>{data?.away_team.abbreviation}</b>
+            <b className={awayWinner ? "text-black" : "text-gray500"}>
+              {data?.away_team.abbreviation}
+            </b>
           </div>
-          <div className="flex-1 bg-gray-50 text-[24px] text-center">
+          <div
+            className={`flex-0 bg-gray-50 text-[24px] text-center font-bold ${
+              awayWinner ? "text-black" : "text-gray-500"
+            }`}
+          >
             {data?.away_period_scores.reduce(
               (accumulator, currentValue) => accumulator + currentValue,
               0,
             )}
           </div>
-          <div className="flex-1 text-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="blue"
-              className={`w-3 h-3 ${
-                awayScore < homeScore &&
-                data?.event_information.status === "completed"
-                  ? "invisible"
-                  : ""
-              }`}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 19.5L8.25 12l7.5-7.5"
-              />
-            </svg>
+          <div className="flex-0 text-center px-4">
+            <img
+              src={arrowL}
+              alt="arrowLeft"
+              className={`w-1 h-2 ${homeWinner ? "invisible" : ""}`}
+            />
           </div>
-          <div className="flex-1 bg-gray-50 text-blue-600  text-[14px] text-center">
+          <div className="flex-0 bg-gray-50 text-[14px] text-center font-bold">
             {data?.event_information?.status === "completed"
               ? "Final"
               : data?.event_information?.status}
           </div>
-          <div className="flex-1 flex justify-end">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="blue"
-              className={`w-3 h-3 ${
-                homeScore < awayScore &&
-                data?.event_information.status === "completed"
-                  ? "invisible"
-                  : ""
-              }`}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M8.25 4.5l7.5 7.5-7.5 7.5"
-              />
-            </svg>
+          <div className="flex-0 flex justify-end px-4">
+            <img
+              src={arrowR}
+              alt="arrowRight"
+              className={`w-2 h-2 ${awayWinner ? "invisible" : ""}`}
+            />
           </div>
-          <div className="flex-1 bg-gray-50 text-[24px] text-center">
+          <div
+            className={`flex-0 bg-gray-50 text-[24px] text-center font-bold ${
+              homeWinner ? "text-black" : "text-gray-500"
+            }`}
+          >
             {data?.home_period_scores.reduce(
               (accumulator, currentValue) => accumulator + currentValue,
               0,
             )}
           </div>
-          <div className="flex-1 bg-gray-50 p-4 text-center text-gray-700">
+          <div className="flex-0 bg-gray-50 p-4 text-center text-gray-500">
             <img
               src={`./${`${data?.home_team.first_name} ${data?.home_team.last_name}`}.gif`}
               alt="team"
+              className="h-10 w-16"
             />
-            <b>{data?.home_team.abbreviation}</b>
+            <b className={homeWinner ? "text-black" : "text-gray500"}>
+              {data?.home_team.abbreviation}
+            </b>
           </div>
         </div>
         <table className="w-full bg-white border">
@@ -321,6 +391,11 @@ function App() {
               ? [...data.away_pitchers, ...data.home_pitchers]
               : [],
           )}
+        {data?.event_information?.status === "completed" &&
+          data?.league === "NBA" &&
+          data?.away_stats &&
+          data?.home_stats &&
+          displayHighScorers(data?.away_stats, data?.home_stats)}
       </div>
     </div>
   );
